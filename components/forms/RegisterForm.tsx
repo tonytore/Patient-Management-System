@@ -85,7 +85,6 @@ const RegisterForm = ({ user }: { user: User }) => {
         privacyConsent: values.privacyConsent,
       };
 
-    
       const newPatient = await registerPatient(patient);
 
       if (newPatient) {

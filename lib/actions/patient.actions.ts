@@ -1,6 +1,5 @@
 "use server";
 
-
 import { ID, Query } from "node-appwrite";
 import { InputFile } from "node-appwrite/file";
 
@@ -80,7 +79,7 @@ export const registerPatient = async ({
       DATABASE_ID!,
       PATIENT_COLLECTION_ID!,
       ID.unique(),
-      
+
       {
         identificationDocumentId: file?.$id ? file.$id : null,
         identificationDocumentUrl: file?.$id
