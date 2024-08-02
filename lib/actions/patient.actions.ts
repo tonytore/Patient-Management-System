@@ -15,7 +15,8 @@ import {
 } from "../appwrite.config";
 import { parseStringify } from "../utils";
 
-// CREATE APPWRITE USER
+
+
 export const createUser = async (user: CreateUserParams) => {
   try {
     // Create new user -> https://appwrite.io/docs/references/1.5.x/server-nodejs/users#create
@@ -41,7 +42,7 @@ export const createUser = async (user: CreateUserParams) => {
   }
 };
 
-// GET USER
+
 export const getUser = async (userId: string) => {
   try {
     const user = await users.get(userId);
@@ -55,13 +56,13 @@ export const getUser = async (userId: string) => {
   }
 };
 
-// REGISTER PATIENT
+
 export const registerPatient = async ({
   identificationDocument,
   ...patient
 }: RegisterUserParams) => {
   try {
-    // Upload file ->  // https://appwrite.io/docs/references/cloud/client-web/storage#createFile
+   
     let file;
     if (identificationDocument) {
       const inputFile =
@@ -74,7 +75,7 @@ export const registerPatient = async ({
       file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile);
     }
 
-    // Create new patient document -> https://appwrite.io/docs/references/cloud/server-nodejs/databases#createDocument
+   
     const newPatient = await databases.createDocument(
       DATABASE_ID!,
       PATIENT_COLLECTION_ID!,
@@ -95,7 +96,7 @@ export const registerPatient = async ({
   }
 };
 
-// GET PATIENT
+
 export const getPatient = async (userId: string) => {
   try {
     const patients = await databases.listDocuments(
@@ -103,8 +104,8 @@ export const getPatient = async (userId: string) => {
       PATIENT_COLLECTION_ID!,
       [Query.equal("userId", [userId])]
     );
-
-    return parseStringify(patients.documents[0]);
+    
+    return parseStringify(patients);
   } catch (error) {
     console.error(
       "An error occurred while retrieving the patient details:",

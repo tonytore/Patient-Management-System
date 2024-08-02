@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import {  z } from "zod";
 
 import { SelectItem } from "@/components/ui/select";
 import { Doctors } from "@/constants";
@@ -21,6 +21,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { Form } from "../ui/form";
+import toast from "react-hot-toast";
 
 export const AppointmentForm = ({
   userId,
@@ -83,13 +84,20 @@ export const AppointmentForm = ({
         };
 
         const newAppointment = await createAppointment(appointment);
-
+        
+       
+        
         if (newAppointment) {
           form.reset();
+          toast.success(`New Appointment Created Successfully`);
           router.push(
             `/patients/${userId}/new-appointment/success?appointmentId=${newAppointment.$id}`
           );
         }
+
+     
+
+
       } else {
         const appointmentToUpdate = {
           userId,
@@ -101,7 +109,6 @@ export const AppointmentForm = ({
             cancellationReason: values.cancellationReason,
           },
           type,
-          //timeZone:new Date(values.schedule).toString(),
         };
 
         const updatedAppointment = await updateAppointment(appointmentToUpdate);

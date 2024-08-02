@@ -25,6 +25,8 @@ import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import { FileUploader } from "../FileUploader";
 import SubmitButton from "../SubmitButton";
+import toast from "react-hot-toast";
+
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -41,9 +43,10 @@ const RegisterForm = ({ user }: { user: User }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
+  
     setIsLoading(true);
 
-    // Store file info in form data as
+   
     let formData;
     if (
       values.identificationDocument &&
@@ -88,6 +91,7 @@ const RegisterForm = ({ user }: { user: User }) => {
       const newPatient = await registerPatient(patient);
 
       if (newPatient) {
+        toast.success(`user Registered Successfully`);
         router.push(`/patients/${user.$id}/new-appointment`);
       }
     } catch (error) {
@@ -113,8 +117,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             <h2 className="sub-header">Personal Information</h2>
           </div>
 
-          {/* NAME */}
-
+        
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
@@ -124,7 +127,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             iconAlt="user"
           />
 
-          {/* EMAIL & PHONE */}
+        
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.INPUT}
@@ -180,7 +183,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             />
           </div>
 
-          {/* Address & Occupation */}
+      
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.INPUT}
@@ -199,7 +202,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             />
           </div>
 
-          {/* Emergency Contact Name & Emergency Contact Number */}
+      
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.INPUT}
@@ -224,7 +227,6 @@ const RegisterForm = ({ user }: { user: User }) => {
             <h2 className="sub-header">Medical Information</h2>
           </div>
 
-          {/* PRIMARY CARE PHYSICIAN */}
           <CustomFormField
             fieldType={FormFieldType.SELECT}
             control={form.control}
@@ -248,7 +250,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             ))}
           </CustomFormField>
 
-          {/* INSURANCE & POLICY NUMBER */}
+          
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.INPUT}
@@ -267,7 +269,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             />
           </div>
 
-          {/* ALLERGY & CURRENT MEDICATIONS */}
+         
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.TEXTAREA}
@@ -286,7 +288,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             />
           </div>
 
-          {/* FAMILY MEDICATION & PAST MEDICATIONS */}
+         
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.TEXTAREA}

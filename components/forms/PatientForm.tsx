@@ -14,6 +14,7 @@ import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { createUser } from "@/lib/actions/patient.actions";
+import toast from "react-hot-toast";
 
 export const PatientForm = () => {
   const router = useRouter();
@@ -42,6 +43,7 @@ export const PatientForm = () => {
 
       if (newUser) {
         router.push(`/patients/${newUser.$id}/register`);
+        toast.success(`User Created Successfully`);
       }
     } catch (error) {
       console.log(error);
