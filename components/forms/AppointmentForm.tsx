@@ -72,7 +72,11 @@ export const AppointmentForm = ({
     }
 
     try {
+      console.log(patientId);
+
       if (type === "create" && patientId) {
+        console.log(patientId);
+        
         const appointment = {
           userId,
           patient: patientId,
@@ -89,7 +93,7 @@ export const AppointmentForm = ({
         
         if (newAppointment) {
           form.reset();
-          toast.success(`New Appointment Created Successfully`);
+          toast.success(`New Appointment Scheduled Successfully`);
           router.push(
             `/patients/${userId}/new-appointment/success?appointmentId=${newAppointment.$id}`
           );

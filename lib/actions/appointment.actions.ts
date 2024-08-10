@@ -121,7 +121,6 @@ export const updateAppointment = async ({
 }: UpdateAppointmentParams) => {
   try {
     const updatedAppointment = await databases.updateDocument(
-      ID.unique(),
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
       appointmentId,
